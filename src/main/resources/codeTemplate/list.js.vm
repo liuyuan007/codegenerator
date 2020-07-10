@@ -1,0 +1,117 @@
+$(function () {
+    $("#jqGrid").jqGrid({
+        url: '../${pathName}/list',
+        datatype: "json",
+        colModel: [			
+#foreach($column in $columns)
+#if($column.columnName == $pk.columnName)
+			{ label: '${column.attrname}', name: '${column.attrname}', index: '${column.columnName}', hidden: true, key: true },
+#else
+			{ label: '${column.comments}', name: '${column.attrname}', index: '${column.columnName}' } ,
+			
+#end			
+#end
+            { label: '操作',  sortable: false, formatter: function(cellvalue, options, rowObject ){
+                return '<a class="btn btn-primary btn-xs" v-if="hasPermission(\'${pathName}:update\')" @click="update(\''+rowObject.${pk.attrname}+'\')"><i class="fa fa-edit"></i> 修改</a>';
+            }}
+        ],
+        sortable: false,
+        height: $(window).height()-130,
+		viewrecords: true,
+        rowNum: 10,
+		rowList : [10,30,50],
+        rownumbers: true, 
+        rownumWidth: 25,
+        autowidth:true,
+        multiselect: true,
+        pager: "#jqGridPager",
+        jsonReader : {
+            root: "page.list",
+            page: "page.currPage",
+            total: "page.totalPage",
+            records: "page.totalCount"
+        },
+        prmNames : {
+            page:"page", 
+            rows:"limit", 
+            order: "order"
+        },
+        gridComplete:function(){
+            //隐藏grid底部滚动条
+            $("#jqGrid").closest(".ui-jqgrid-bdiv").css({ "overflow-x" : "hidden" });
+            new Vue({
+                el:"#jqGrid tbody",
+                methods: {
+                    update: function (${pk.attrname}) {
+                        vm.update(${pk.attrname});
+                    }
+                }
+            });
+        }
+    });
+    App.validate("#ajaxForm",null,function(){
+        vm.saveOrUpdate();
+    });
+});
+
+var vm = new Vue({
+	el:'#rrapp',
+	data:{
+        q:{
+            key: null
+        },
+		showList: true,
+		title: null,
+		${classname}: {}
+	},
+	methods: {
+		query: function () {
+			vm.reload();
+		},
+		add: function(){
+			vm.showList = false;
+			vm.title = "新增";
+			vm.${classname} = {};
+		},
+		update: function (${pk.attrname}) {
+			vm.showList = false;
+            vm.title = "修改";
+            vm.getInfo(${pk.attrname})
+		},
+		saveOrUpdate: function (event) {
+			var url = vm.${classname}.${pk.attrname} == null ? "../${pathName}/save" : "../${pathName}/update";
+            App.ajax(url, JSON.stringify(vm.${pathName}), "POST", function(){
+                App.notify("操作成功",{"type":"Success"});
+                vm.reload();
+            });
+		},
+		del: function (event) {
+			var ${pk.attrname}s = getSelectedRows();
+			if(${pk.attrname}s == null){
+				return ;
+			}
+            App.confirm('确定要删除选中的记录？', function(){
+                App.ajax("../${pathName}/delete", JSON.stringify(${pk.attrname}s), "POST", function(){
+                    App.notify("操作成功",{"type":"Success"});
+                    vm.reload();
+                });
+            });
+		},
+		getInfo: function(${pk.attrname}){
+            App.beginLoading();
+			$.get("../${pathName}/info/"+${pk.attrname}, function(r){
+                App.endLoading();
+                vm.${classname} = r.${classname};
+            });
+		},
+		reload: function (event) {
+			vm.showList = true;
+			var page = $("#jqGrid").jqGrid('getGridParam','page');
+			$("#jqGrid").jqGrid('setGridParam',{
+                postData:{'key': vm.q.key},
+                page:page
+            }).trigger("reloadGrid");
+            $("#ajaxForm").data('bootstrapValidator').resetForm();
+		}
+	}
+});

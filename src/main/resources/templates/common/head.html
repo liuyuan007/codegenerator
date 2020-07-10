@@ -1,0 +1,21 @@
+<script type="text/javascript">
+    var pathRedirect = {
+        projectPath : '${projectPath}',
+        getWebPath : function(path) {
+            return pathRedirect.projectPath + path;
+        },
+        location : function(path) {
+            return location.href = pathRedirect.getWebPath(path);
+        }
+    };
+</script>
+<!-- common css -->
+<link href="${projectPath}/plugins/bootstrap3/css/bootstrap.min.css" rel="stylesheet">
+<link href="${projectPath}/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+<!--<link href="${projectPath}/css/style.css" rel="stylesheet">-->
+<!-- common js -->
+<script src="${projectPath}/plugins/jquery-3.2.0.min.js"></script>
+<script src="${projectPath}/plugins/bootstrap3/js/bootstrap.min.js"></script>
+<script src="${projectPath}/plugins/layer3/layer.js"></script>
+<script src="${projectPath}/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="${projectPath}/js/common.js"></script>

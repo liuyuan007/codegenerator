@@ -1,0 +1,19 @@
+package ${package}.dao;
+
+import java.util.List;
+import java.util.Map;
+import ${package}.base.BaseTKMapper;
+import ${package}.entity.${className};
+import org.apache.ibatis.annotations.Param;
+
+
+/**
+* @desc: ${comments}
+* @author: ${author}
+* @email: ${email}
+* @date: ${datetime}
+* version: 1.0
+*/
+public interface ${className}Mapper extends BaseTKMapper<${className}Dto> {
+
+}

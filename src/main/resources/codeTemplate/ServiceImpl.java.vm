@@ -1,0 +1,51 @@
+package ${package}.impl;
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import ${package}.base.BaseService;
+import ${package}.base.IBaseMapper;
+import ${package}.service.${className}Service;
+import ${package}.dao.${className}Dao;
+import ${package}.entity.${className};
+import java.util.List;
+import java.util.Map;
+
+
+
+/**
+* @desc: ${comments}
+* @author: ${author}
+* @email: ${email}
+* @date: ${datetime}
+* version: 1.0
+*/
+@Service("${classname}Service")
+@Slf4j
+@Transactional
+public class ${className}ServiceImpl extends BaseServiceImpl<${className},${pk.attrType}> implements ${className}Service {
+
+	@Autowired
+	private ${className}Mapper ${classname}Mapper;
+
+    @Override
+    protected IBaseMapper <${className}> getBaseMapper() {
+        return ${classname}Mapper;
+    }
+
+    @Override
+    public MultiResult<${className}Dto> queryList(${className}Qo qo){
+        return new MultiResult().ok(${classname}Mapper.queryList(map));
+    }
+
+    @Override
+    public MultiResult<${className}Dto> page(${className}Qo qo){
+        PageMethod.startPage(qo.getPageNo(),qo.getPageSize());
+        List<${className}Dto> list = queryList(qo);
+        return new MultiResult().okPage(new PageInfo(list));
+    }
+
+
+
+}

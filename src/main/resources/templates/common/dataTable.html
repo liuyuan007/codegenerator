@@ -1,0 +1,32 @@
+<%include("/common/head.html"){}%>
+<link href="${projectPath}/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
+<link href="${projectPath}/plugins/dataTables/dataTables.responsive.css" rel="stylesheet">
+<link href="${projectPath}/plugins/dataTables/dataTables.tableTools.min.css" rel="stylesheet">
+<!--图标-->
+<link href="${projectPath}/plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
+<style>
+    .row{
+        margin: 0;
+    }
+    .custom_table th.ck{width: 1px;padding: 8px;}
+    .custom_table .toolbar button{margin-right: 10px;}
+    .custom_table .bottom .dataTables_info{
+        float: left;
+    }
+    .custom_table .bottom .dataTables_paginate,.custom_table .bottom .dataTables_length{
+        float: right;
+    }
+    .custom_table .bottom .dataTables_length{
+        padding-top: 5px;
+        margin-right: 20px;
+    }
+    .custom_table .bottom .dataTables_length label{
+        margin: 0px;padding: 0px;
+    }
+
+</style>
+<script src="${projectPath}/plugins/dataTables/jquery.dataTables.js"></script>
+<script src="${projectPath}/plugins/dataTables/jquery.dataTables.zh.js"></script>
+<script src="${projectPath}/plugins/dataTables/dataTables.bootstrap.js"></script>
+<script src="${projectPath}/plugins/dataTables/dataTables.responsive.js"></script>
+

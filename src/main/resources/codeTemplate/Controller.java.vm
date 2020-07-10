@@ -1,0 +1,84 @@
+package ${package}.controller;
+
+import ${package}.entity.${className};
+import ${package}.service.${className}Service;
+import ${package}.utils.PageUtils;
+import ${package}.utils.Query;
+import ${package}.utils.R;
+import ${package}.utils.annotation.SysLog;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import io.swagger.annotations.*;
+
+import java.util.List;
+import java.util.Map;
+
+
+/**
+* @desc: ${comments}
+* @author: ${author}
+* @email: ${email}
+* @date: ${datetime}
+* version: 1.0
+*/
+@RestController
+@RequestMapping("${pathName}")
+@HttpInfoLog
+@Validated
+public class ${className}Controller {
+
+	@Autowired
+	private ${className}Service ${classname}Service;
+
+    /**
+    * 列表
+    */
+    @GetMapping(value="/list")
+    public MultiResult<${className}Dto> list(@Valid ${className}Qo qo){
+        return ${classname}Service.queryList(qo);
+    }
+
+    /**
+    * 列表分页
+    */
+    @GetMapping(value="/page")
+    public MultiResult<${className}Dto> page(@Valid ${className}Qo qo){
+        return ${classname}Service.page(qo);
+    }
+
+    /**
+     * 详情
+     */
+    @GetMapping(value="/detail/{${pk.attrname}}")
+    public SingleResult<${classname}Dto> detail(@NotBlank(message = "${pk.attrname}参数不能为空")
+                                                  @PathVariable("${pk.attrname}") ${pk.attrType} ${pk.attrname}){
+        return ${classname}Service.selectByPrimaryKey(${pk.attrname});
+    }
+
+    /**
+     * 保存
+     */
+    @PostMapping(value="/save")
+    public SingleResult save(@Valid @RequestBody ${className}Dto dto){
+        return ${classname}Service.insertSelective(dto);
+    }
+
+    /**
+     * 修改
+     */
+    @PostMapping(value="/update")
+    public SingleResult update(@Valid @RequestBody ${className}Dto dto){
+        return ${classname}Service.updateByPrimaryKeySelective(dto);
+    }
+
+    /**
+    * 删除(支持批量)
+    */
+    @PostMapping(value="/delete")
+    public SingleResult delete(@RequestBody ${pk.attrType} [] ${pk.attrname}s){
+        return ${classname}Service.deleteBatch(${pk.attrname}s);
+    }
+
+
+}

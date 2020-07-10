@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>代码生成</title>
+    <%include("/common/dataTable.html"){}%>
+</head>
+<body>
+<div id="page-wrapper" class="gray-bg" style="margin-left: 0px">
+    <div class="row wrapper border-bottom white-bg page-heading">
+
+        <div class="ibox-title">
+            <ol class="breadcrumb">
+                <li></li>
+                <li><strong><a href="">数据库表</a></strong></li>
+            </ol>
+        </div>
+        <div class="ibox-content custom_table" style="margin: 50px;">
+            <table class="table table-striped table-bordered table-hover " id="editable">
+                <thead>
+                <tr>
+                    <th class="ck"><input type="checkbox" name="tables" id="checkAll" onclick="Table.checkAll(this);" /></th>
+                    <th>表名</th>
+                    <th>Engine</th>
+                    <th>表备注</th>
+                    <th>创建时间</th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- Page-Level Scripts -->
+<script>
+    var table;
+    $(document).ready(function() {
+        initTable();
+
+        //enter回车事件
+        document.onkeydown = function(e){
+            var ev = document.all ? window.event : e;
+            if(ev.keyCode==13) {
+                $('#filterButton').trigger('click');//点击搜索
+            }
+        }
+    });
+
+    function initTable(){
+        table =  Table.builderTable({
+            tableId : 'editable',//表格id
+            controller : '/generator',//表格操作对应控制器
+            hasServer : true,//是否从服务端获取数据
+            delTipsKey : 'name',//删除提示内容key
+            tips : '数据库表',  //提示标题
+            //自定义事件
+            buttonsCallBack : function() {
+                var html = '<button class="btn btn-sm btn-primary"  type="button" ' +
+                        'onclick="code()"><span class="bold">生成代码</span></button>';
+                return html;
+            }
+        }, {
+            columns : [  {
+                data : "tableName"
+               },{
+                    data : "tableName"
+                },{
+                    data : "engine"
+                },{
+                    data : "tableComment"
+                },{
+                    data : "createTime"
+                } ],
+            //定义某列内容
+            columnDefs : [{
+                targets : 0,
+                render : function(data, type, row) {
+                    return '<input type="checkbox" name="tables" value="'+row.tableName+'">';
+                }
+            }]
+        });
+    }
+
+    function  code() {
+        var postData = Utils.getDataTableCheckIds("editable");
+        if (Utils.isEmptyObject(postData)){
+            return ;
+        }
+        var tables = "";
+        for (var i = 0;i<= postData.length;i++){
+            if (Utils.isEmptyObject(postData[i]) ){
+                continue;
+            }
+            tables += postData[i].value+",";
+        }
+        window.open("generator/code?tables="+tables);
+    }
+
+</script>
+</body>
+</html>

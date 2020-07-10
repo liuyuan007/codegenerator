@@ -1,0 +1,22 @@
+package ${package}.service;
+
+import ${package}.entity.${className};
+import ${package}.base.IBaseService;
+import java.util.List;
+import java.util.Map;
+
+/**
+* @desc: ${comments}
+* @author: ${author}
+* @email: ${email}
+* @date: ${datetime}
+* version: 1.0
+*/
+public interface ${className}Service extends BaseService<${className},${pk.attrType}> {
+
+    MultiResult<${className}Dto> queryList(${className}Qo qo);
+
+    MultiResult<${className}Dto> page(${className}Qo qo);
+
+    SingleResult deleteBatch(${pk.attrType}[] ${pk.attrname}s);
+}

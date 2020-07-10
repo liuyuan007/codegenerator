@@ -1,0 +1,78 @@
+<!DOCTYPE html><html>
+<head><title>配置说明</title><meta charset='utf-8'>
+  <link href='https://dn-maxiang.qbox.me/res-min/themes/marxico.css' rel='stylesheet'>
+  <style></style>
+</head>
+<body><div id='preview-contents' class='note-content'>
+                        
+                    
+
+<div><div class="toc"><div class="toc">
+<ul>
+<li><ul>
+<li><ul>
+<li><a href="#配置说明">配置说明</a><ul>
+<li><a href="#1自定义生成模板">1.自定义生成模板</a></li>
+<li><a href="#2配置文件">2.配置文件</a></li>
+<li><a href="#3生成的文件">3.生成的文件</a></li>
+<li><a href="#运行说明">运行说明</a></li>
+<li><a href="#注意">注意</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<h3 id="配置说明">配置说明</h3>
+
+
+
+<h4 id="1自定义生成模板">1.自定义生成模板</h4>
+
+<blockquote>
+  <p>自定义的生成模板在resources\codeTemplate. <br>
+  可自定义html、sql、java…等模板，然后在GenUtil代码加入生成的模板配置（具体参考其他模板的代码）</p>
+</blockquote>
+
+
+
+<h4 id="2配置文件">2.配置文件</h4>
+
+<blockquote>
+  <p>位于resource\generator.properties  <br>
+   可根据自身情况自定义包名和生成的文件夹</p>
+</blockquote>
+
+
+
+<h4 id="3生成的文件">3.生成的文件</h4>
+
+<blockquote>
+  <p>生成的文件包含：Controller.java、Service.java、Entity.java,Mapper.java以及Mapper.xml</p>
+</blockquote>
+
+
+
+<h4 id="运行说明">运行说明</h4>
+
+<blockquote>
+  <p><strong>1.替换配置文件generator.properties 的package（包名和文件路径）和author（作者名称）</strong> <br>
+  <strong>此包名是Mapper.xml映射包的指向，若出现错误，请检查Mapper.xml的目录指向</strong></p>
+  
+  <p><strong>2.在application.xml配置相应的数据库信息</strong></p>
+  
+  <p><strong>3.该模块不依赖任何模块，直接运行CodeApplication</strong></p>
+  
+  <p><strong>4.运行后，会在控制台打印出一个地址，直接打开地址生成代码</strong></p>
+</blockquote>
+
+<h4 id="注意">注意</h4>
+
+<blockquote>
+  <p>若数据库表没有主键，entity生成默认是设置第一个字段为主键，需要手动去掉Entity的主键注解</p>
+</blockquote></div></body></html>

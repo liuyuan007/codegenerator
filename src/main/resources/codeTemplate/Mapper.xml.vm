@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="${package}.mapper.${className}Mapper">
+
+    <select id="queryList" resultType="${package}.dto.${className}Dto">
+        SELECT * FROM ${tableName}
+        <where>
+            <if test="key != null and key.trim() != ''">
+            </if>
+        </where>
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+            <otherwise>
+                order by ${pk.columnName} desc
+            </otherwise>
+        </choose>
+    </select>
+
+    <delete id="deleteBatch">
+        delete from ${tableName} where ${pk.columnName} in
+        <foreach item="${pk.attrname}" collection="${pk.attrname}s" open="(" separator="," close=")">
+            #{${pk.attrname}}
+        </foreach>
+    </delete>
+</mapper>

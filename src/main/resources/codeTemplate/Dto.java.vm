@@ -1,0 +1,40 @@
+package ${package}.entity;
+
+import java.io.Serializable;
+import java.util.Date;
+import lombok.Data;
+
+#if($pk)
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+#end
+
+#if(${hasBigDecimal})
+import java.math.BigDecimal;
+#end
+
+
+/**
+* @desc: ${comments}
+* @author: ${author}
+* @email: ${email}
+* @date: ${datetime}
+* version: 1.0
+*/
+@Table(name="${tableName}")
+@Data
+public class ${className}Dto implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
+#foreach ($column in $columns)
+	/**
+	*  $column.comments
+	*/
+	#if($pk && $pk.attrname == $column.attrname)
+@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	#end
+private $column.attrType $column.attrname;
+#end
+}
