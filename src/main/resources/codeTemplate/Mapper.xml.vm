@@ -5,13 +5,14 @@
 
     <select id="queryList" resultType="${package}.dto.${className}Dto">
         SELECT * FROM ${tableName}
+        <!-- 这里字段目前统一按string类型做生成处理，自己可按属性实际类型做适当的if判断修改-->
         <where>
-            <!-- 自己在此补充过滤字段-->
-            <if test="key != null and key.trim() != ''">
+            #foreach ($column in $columns)<if test="${column.attrname} != null and ${column.attrname} != ''">
+                ${column.columnName} = #{${column.attrname}}
             </if>
-        </where>
+            #end</where>
         <choose>
-            <when test="orderBy != null and orderBy.trim() != ''">
+            <when test="orderBy != null and orderBy != ''">
                 order by ${orderBy} ${order}
             </when>
             <otherwise>
@@ -22,7 +23,7 @@
 
     <delete id="deleteBatch">
         delete from ${tableName} where ${pk.columnName} in
-        <foreach item="${pk.attrname}" collection="${pk.attrname}s" open="(" separator="," close=")">
+        <foreach item="${pk.attrname}" collection="array" open="(" separator="," close=")">
             #{${pk.attrname}}
         </foreach>
     </delete>

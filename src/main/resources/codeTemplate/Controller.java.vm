@@ -47,9 +47,8 @@ public class ${className}Controller {
     /**
      * 详情
      */
-    @GetMapping(value="/detail/{${pk.attrname}}")
-    public SingleResult<${className}Dto> detail(@NotBlank(message = "${pk.attrname}参数不能为空")
-                                                  @PathVariable("${pk.attrname}") ${pk.attrType} ${pk.attrname}){
+    @GetMapping(value="/detail}")
+    public SingleResult<${className}Dto> detail(@NotBlank(message = "${pk.attrname}参数不能为空") ${pk.attrType} ${pk.attrname}){
         return ${classname}Service.selectByPrimaryKey(${pk.attrname});
     }
 
@@ -73,7 +72,7 @@ public class ${className}Controller {
     * 删除(支持批量)
     */
     @PostMapping(value="/delete")
-    public SingleResult delete(@RequestBody ${pk.attrType} [] ${pk.attrname}s){
+    public SingleResult delete(@RequestBody ${pk.attrType}[] ${pk.attrname}s){
         return ${classname}Service.deleteBatch(${pk.attrname}s);
     }
 
