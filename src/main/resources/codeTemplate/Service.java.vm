@@ -1,9 +1,10 @@
 package ${package}.service;
 
-import ${package}.entity.${className};
-import ${package}.base.IBaseService;
-import java.util.List;
-import java.util.Map;
+import ${package}.dto.${className}Dto;
+import ${package}.base.BaseService;
+import ${package}.base.SingleResult;
+import ${package}.base.MultiResult;
+import ${package}.qo.${className}Qo;
 
 /**
 * @desc: ${comments}
@@ -12,7 +13,7 @@ import java.util.Map;
 * @date: ${datetime}
 * version: 1.0
 */
-public interface ${className}Service extends BaseService<${className},${pk.attrType}> {
+public interface ${className}Service extends BaseService<${className}Dto,${pk.attrType}> {
 
     MultiResult<${className}Dto> queryList(${className}Qo qo);
 

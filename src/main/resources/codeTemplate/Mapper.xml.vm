@@ -6,12 +6,13 @@
     <select id="queryList" resultType="${package}.dto.${className}Dto">
         SELECT * FROM ${tableName}
         <where>
+            <!-- 自己在此补充过滤字段-->
             <if test="key != null and key.trim() != ''">
             </if>
         </where>
         <choose>
-            <when test="sidx != null and sidx.trim() != ''">
-                order by ${sidx} ${order}
+            <when test="orderBy != null and orderBy.trim() != ''">
+                order by ${orderBy} ${order}
             </when>
             <otherwise>
                 order by ${pk.columnName} desc

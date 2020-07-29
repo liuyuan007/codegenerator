@@ -1,18 +1,15 @@
 package ${package}.controller;
 
-import ${package}.entity.${className};
-import ${package}.service.${className}Service;
-import ${package}.utils.PageUtils;
-import ${package}.utils.Query;
-import ${package}.utils.R;
-import ${package}.utils.annotation.SysLog;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
+import com.quanbu.bds.base.annotation.HttpLog;
+import ${package}.dto.${className}Dto;
+import ${package}.qo.${className}Qo;
+import ${package}.${className}Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import io.swagger.annotations.*;
 
-import java.util.List;
-import java.util.Map;
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 
 
 /**
@@ -24,7 +21,7 @@ import java.util.Map;
 */
 @RestController
 @RequestMapping("${pathName}")
-@HttpInfoLog
+@HttpLog
 @Validated
 public class ${className}Controller {
 
@@ -51,7 +48,7 @@ public class ${className}Controller {
      * 详情
      */
     @GetMapping(value="/detail/{${pk.attrname}}")
-    public SingleResult<${classname}Dto> detail(@NotBlank(message = "${pk.attrname}参数不能为空")
+    public SingleResult<${className}Dto> detail(@NotBlank(message = "${pk.attrname}参数不能为空")
                                                   @PathVariable("${pk.attrname}") ${pk.attrType} ${pk.attrname}){
         return ${classname}Service.selectByPrimaryKey(${pk.attrname});
     }

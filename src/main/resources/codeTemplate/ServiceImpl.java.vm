@@ -1,16 +1,18 @@
 package ${package}.impl;
 
-
+import com.github.pagehelper.PageInfo;
+import com.github.pagehelper.page.PageMethod;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ${package}.base.BaseService;
-import ${package}.base.IBaseMapper;
-import ${package}.service.${className}Service;
-import ${package}.dao.${className}Dao;
-import ${package}.entity.${className};
+import ${package}.base.BaseTKMapper;
+import ${package}.${className}Service;
+import ${package}.mapper.${className}Mapper;
+import ${package}.dto.${className}Dto;
+import ${package}.qo.${className}Qo;
 import java.util.List;
-import java.util.Map;
 
 
 
@@ -24,28 +26,32 @@ import java.util.Map;
 @Service("${classname}Service")
 @Slf4j
 @Transactional
-public class ${className}ServiceImpl extends BaseServiceImpl<${className},${pk.attrType}> implements ${className}Service {
+public class ${className}ServiceImpl extends BaseServiceImpl<${className}Dto,${pk.attrType}> implements ${className}Service {
 
 	@Autowired
 	private ${className}Mapper ${classname}Mapper;
 
     @Override
-    protected IBaseMapper <${className}> getBaseMapper() {
+    protected BaseTKMapper <${className}Dto> getBaseMapper() {
         return ${classname}Mapper;
     }
 
     @Override
     public MultiResult<${className}Dto> queryList(${className}Qo qo){
-        return new MultiResult().ok(${classname}Mapper.queryList(map));
+        return new MultiResult().ok(${classname}Mapper.queryList(qo));
     }
 
     @Override
     public MultiResult<${className}Dto> page(${className}Qo qo){
         PageMethod.startPage(qo.getPageNo(),qo.getPageSize());
-        List<${className}Dto> list = queryList(qo);
+        List<${className}Dto> list = ${classname}Mapper.queryList(qo);
         return new MultiResult().okPage(new PageInfo(list));
     }
 
-
+    @Override
+    public SingleResult deleteBatch(${pk.attrType}[] ${pk.attrname}s) {
+        ${classname}Mapper.deleteBatch(${pk.attrname}s);
+        return new SingleResult().ok(null);
+    }
 
 }

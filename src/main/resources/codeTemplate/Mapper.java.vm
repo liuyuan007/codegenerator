@@ -16,4 +16,16 @@ import org.apache.ibatis.annotations.Param;
 */
 public interface ${className}Mapper extends BaseTKMapper<${className}Dto> {
 
+    /**
+    * 条件列表查询
+    * @param qo 条件对象
+    * @return 返回符合条件的对象集合
+    */
+    List<${className}Dto> queryList(${className}Qo qo);
+
+    /**
+    * 批量删除
+    * @param ${pk.attrname}s 删除的住建集合
+    */
+    void deleteBatch(${pk.attrType}[] ${pk.attrname}s);
 }
