@@ -1,13 +1,17 @@
-package ${package}.service;
+/*
+ * Copyright (c) 2017-2020  ALL RIGHTS RESERVED.
+ * company    致景科技
+ */
 
+package ${package};
+
+import com.quanbu.erpCommon.base.MultiResult;
+import com.quanbu.erpCommon.base.service.BaseService;
+import ${package}.query.${className}Qo;
 import ${package}.dto.${className}Dto;
-import ${package}.base.BaseService;
-import ${package}.base.SingleResult;
-import ${package}.base.MultiResult;
-import ${package}.qo.${className}Qo;
 
 /**
-* @desc: ${comments}
+* @desc: ${comments}业务接口
 * @author: ${author}
 * @email: ${email}
 * @date: ${datetime}
@@ -15,9 +19,17 @@ import ${package}.qo.${className}Qo;
 */
 public interface ${className}Service extends BaseService<${className}Dto,${pk.attrType}> {
 
+    /**
+    * 条件列表查询
+    * @param qo 条件对象
+    * @return 符合条件对象集合
+    */
     MultiResult<${className}Dto> queryList(${className}Qo qo);
 
+    /**
+    * 条件分页列表查询
+    * @param qo 条件对象
+    * @return 符合条件分页数据
+    */
     MultiResult<${className}Dto> page(${className}Qo qo);
-
-    SingleResult deleteBatch(${pk.attrType}[] ${pk.attrname}s);
 }

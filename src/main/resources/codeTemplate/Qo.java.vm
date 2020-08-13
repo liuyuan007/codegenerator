@@ -1,8 +1,14 @@
+/*
+ * Copyright (c) 2017-2020  ALL RIGHTS RESERVED.
+ * company    致景科技
+ */
+
 package ${package}.qo;
 
 import java.io.Serializable;
 import java.util.Date;
 import lombok.Data;
+import com.quanbu.erpCommon.base.query.BaseQuery;
 
 
 #if(${hasBigDecimal})
@@ -18,9 +24,9 @@ import java.math.BigDecimal;
 * version: 1.0
 */
 @Data
-public class ${className}Qo extends BasePageQuery implements Serializable {
+public class ${className}Qo extends BaseQuery implements Serializable {
 
-	private static final long serialVersionUID = 2L;
+	private static final long serialVersionUID = 1L;
 	
 #foreach ($column in $columns)
 	/**

@@ -30,6 +30,7 @@ public class GenUtils {
 		List<String> templates = new ArrayList<String>();
 		templates.add("codeTemplate/Dto.java.vm");
 		templates.add("codeTemplate/Qo.java.vm");
+		templates.add("codeTemplate/Vo.java.vm");
 		templates.add("codeTemplate/Controller.java.vm");
 		templates.add("codeTemplate/Service.java.vm");
 		templates.add("codeTemplate/ServiceImpl.java.vm");
@@ -172,6 +173,9 @@ public class GenUtils {
 		}
 		if(template.contains("Qo.java.vm")){
 			return packagePath + "qo" + File.separator + className + "Qo.java";
+		}
+		if(template.contains("Vo.java.vm")){
+			return packagePath + "vo" + File.separator + className + "Vo.java";
 		}
 		if(template.contains("Controller.java.vm")){
 			return packagePath + "controller" + File.separator + className + "Controller.java";

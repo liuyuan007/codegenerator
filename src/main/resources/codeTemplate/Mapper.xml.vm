@@ -20,11 +20,4 @@
             </otherwise>
         </choose>
     </select>
-
-    <delete id="deleteBatch">
-        delete from ${tableName} where ${pk.columnName} in
-        <foreach item="${pk.attrname}" collection="array" open="(" separator="," close=")">
-            #{${pk.attrname}}
-        </foreach>
-    </delete>
 </mapper>

@@ -1,26 +1,36 @@
-package ${package}.controller;
+/*
+* Copyright (c) 2017-2020  ALL RIGHTS RESERVED.
+* company    致景科技
+*/
 
-import com.quanbu.bds.base.annotation.HttpLog;
+package ${package};
+
+import com.quanbu.erpCommon.base.annotation.HttpLog;
+import com.quanbu.erpCommon.base.annotation.OperationLogRecord;
+import com.quanbu.erpCommon.base.MultiResult;
+import com.quanbu.erpCommon.base.SingleResult;
+import com.quanbu.erpCommon.operate.enums.SysOperateTypeEnum;
 import ${package}.dto.${className}Dto;
-import ${package}.qo.${className}Qo;
-import ${package}.${className}Service;
+import ${package}.query.${className}Qo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
+import java.util.List;
 
 
 /**
-* @desc: ${comments}
-* @author: ${author}
-* @email: ${email}
-* @date: ${datetime}
-* version: 1.0
+* ${comments}控制器
+*
+* @author:      ${author}
+* @email:       ${email}
+* @createDate:  ${datetime}
+* version:      1.0
 */
 @RestController
-@RequestMapping("${pathName}")
+@RequestMapping("/${pathName}")
 @HttpLog
 @Validated
 public class ${className}Controller {
@@ -55,25 +65,28 @@ public class ${className}Controller {
     /**
      * 保存
      */
+    @OperationLogRecord(type = SysOperateTypeEnum.ADD, desc = "${comments}保存")
     @PostMapping(value="/save")
-    public SingleResult save(@Valid @RequestBody ${className}Dto dto){
+    public SingleResult<Integer> save(@Valid @RequestBody ${className}Dto dto){
         return ${classname}Service.insertSelective(dto);
     }
 
     /**
      * 修改
      */
+    @OperationLogRecord(type = SysOperateTypeEnum.UPDATE, desc = "${comments}修改")
     @PostMapping(value="/update")
-    public SingleResult update(@Valid @RequestBody ${className}Dto dto){
+    public SingleResult<Integer> update(@Valid @RequestBody ${className}Dto dto){
         return ${classname}Service.updateByPrimaryKeySelective(dto);
     }
 
     /**
-    * 删除(支持批量)
+    * 删除(支持批量删除)
     */
+    @OperationLogRecord(type = SysOperateTypeEnum.DELETE, desc = "${comments}删除")
     @PostMapping(value="/delete")
-    public SingleResult delete(@RequestBody ${pk.attrType}[] ${pk.attrname}s){
-        return ${classname}Service.deleteBatch(${pk.attrname}s);
+    public SingleResult<Integer> delete(@RequestBody List<${pk.attrType}> ${pk.attrname}s){
+        return ${classname}Service.deleteBatchByPkList(${pk.attrname}s);
     }
 
 

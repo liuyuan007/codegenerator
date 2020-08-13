@@ -3,16 +3,12 @@
  * company    致景科技
  */
 
-package ${package}.entity;
+package ${package}.vo;
 
 import java.io.Serializable;
 import java.util.Date;
 import lombok.Data;
 
-#if($pk)
-import javax.persistence.Id;
-import javax.persistence.Table;
-#end
 
 #if(${hasBigDecimal})
 import java.math.BigDecimal;
@@ -20,15 +16,14 @@ import java.math.BigDecimal;
 
 
 /**
-* @desc: ${comments}实体类
+* @desc: ${comments}数据展示对象
 * @author: ${author}
 * @email: ${email}
 * @date: ${datetime}
 * version: 1.0
 */
-@Table(name="${tableName}")
 @Data
-public class ${className}Dto implements Serializable {
+public class ${className}Vo implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -36,9 +31,6 @@ public class ${className}Dto implements Serializable {
 	/**
 	*  $column.comments
 	*/
-	#if($pk && $pk.attrname == $column.attrname)
-@Id
-	#end
-private $column.attrType $column.attrname;
+	private $column.attrType $column.attrname;
 #end
 }

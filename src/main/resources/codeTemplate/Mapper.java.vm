@@ -1,10 +1,15 @@
-package ${package}.dao;
+/*
+ * Copyright (c) 2017-2020  ALL RIGHTS RESERVED.
+ * company    致景科技
+ */
+
+package ${package}.mapper;
 
 import java.util.List;
-import java.util.Map;
-import ${package}.base.BaseTKMapper;
-import ${package}.entity.${className};
-import org.apache.ibatis.annotations.Param;
+import com.quanbu.erpCommon.base.basemapper.BaseTKMapper;
+import ${package}.dto.${className}Dto;
+import ${package}.query.${className}Qo;
+
 
 
 /**
@@ -14,7 +19,7 @@ import org.apache.ibatis.annotations.Param;
 * @date: ${datetime}
 * version: 1.0
 */
-public interface ${className}Mapper extends BaseTKMapper<${className}Dto> {
+public interface ${className}Mapper extends BaseTKMapper<${className}Dto,${pk.attrType}> {
 
     /**
     * 条件列表查询
@@ -22,10 +27,4 @@ public interface ${className}Mapper extends BaseTKMapper<${className}Dto> {
     * @return 返回符合条件的对象集合
     */
     List<${className}Dto> queryList(${className}Qo qo);
-
-    /**
-    * 批量删除
-    * @param ${pk.attrname}s 删除的住建集合
-    */
-    void deleteBatch(${pk.attrType}[] ${pk.attrname}s);
 }
