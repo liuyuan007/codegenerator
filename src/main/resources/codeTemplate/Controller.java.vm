@@ -47,7 +47,7 @@ public class ${className}Controller {
     /**
      * 详情
      */
-    @GetMapping(value="/detail}")
+    @GetMapping(value="/detail")
     public SingleResult<${className}Dto> detail(@NotBlank(message = "${pk.attrname}参数不能为空") ${pk.attrType} ${pk.attrname}){
         return ${classname}Service.selectByPrimaryKey(${pk.attrname});
     }
